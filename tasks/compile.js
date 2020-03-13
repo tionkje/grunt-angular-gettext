@@ -9,6 +9,7 @@ module.exports = function (grunt) {
         }
 
         var output = {};
+        var fileNames = {};
         
         this.files.forEach(function (file) {
             var inputs = file.src.map(function (input) {
@@ -17,15 +18,17 @@ module.exports = function (grunt) {
 
             if (!output[file.dest]) {
                 output[file.dest] = inputs;
+                fileNames[file.dest] = file.src;
             } else {
                 output[file.dest] = output[file.dest].concat(inputs);
+                fileNames[file.dest] = fileNames[file.dest].concat(file.src);
             }
         });
         
         for (var dest in output) {
             var compiler = new Compiler(options);
 
-            grunt.file.write(dest, compiler.convertPo(output[dest]));
+            grunt.file.write(dest, compiler.convertPo(output[dest], fileNames[dest]));
         }
     });
 };
