@@ -139,6 +139,15 @@ module.exports = function (grunt) {
                 files: {
                     "tmp/test5.json": ["test/fixtures/fr.po", "test/fixtures/fr1.po"]
                 }
+            },
+
+            test6: {
+                options: {
+                    sort:true
+                },
+                files: {
+                    "tmp/test6.js": ["test/fixtures/nl.po"]
+                }
             }
         },
 
